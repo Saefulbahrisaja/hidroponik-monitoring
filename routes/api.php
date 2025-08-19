@@ -7,6 +7,9 @@ use App\Http\Controllers\Api\SensorController;
 
 Route::post('/sensor', [SensorController::class, 'store']);
 Route::get('/batas', [SensorController::class, 'getBatas']);
+Route::post('/update-batas', [SensorController::class, 'updateBatas']);
+Route::get('/sensor/export', [SensorController::class, 'export']);
+Route::get('/sensor/filter', [SensorController::class, 'filterData']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
