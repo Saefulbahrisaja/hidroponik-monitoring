@@ -24,7 +24,6 @@ class AuthController extends Controller
                 'message' => 'Username atau password salah'
             ], 401);
         }
-
         return response()->json([
             'success' => true,
             'message' => 'Login berhasil',
