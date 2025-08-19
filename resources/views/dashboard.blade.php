@@ -918,9 +918,9 @@ document.getElementById("formLock").addEventListener("click", function () {
         <div class="absolute inset-0 bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl login-form p-6">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">Login</h2>
             <form id="loginForm" class="w-full max-w-xs space-y-4">
-                <input type="text" placeholder="Username" required
+                <input id="username" type="text" placeholder="Username" required
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
-                <input type="password" placeholder="Password" required
+                <input id="password" type="password" placeholder="Password" required
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
                 <button type="submit" 
                     class="w-full px-4 py-2 rounded-lg bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200">
