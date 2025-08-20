@@ -6,6 +6,7 @@ use App\Models\SensorData;
 use App\Models\Pengaturan;
 use App\Exports\SensorExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Http;
 
 
 Route::get('/export-excel', function (Request $request) {
@@ -33,3 +34,5 @@ Route::get('/sensor/live', function () {
         'air_min'       => (float) Pengaturan::where('nama', 'air_min')->value('nilai') ?? 10,
     ]);
 }); 
+
+

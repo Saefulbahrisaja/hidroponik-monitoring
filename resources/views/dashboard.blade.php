@@ -488,70 +488,73 @@
             </div>
 
             <!-- Prediksi & Analisis -->
-            <div class="glass-card p-6 mt-6">
-                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                    <i class="fas fa-brain mr-2 text-indigo-600 animate-pulse"></i>
-                    Prediksi & Analisis
-                </h3>
-                <div class="space-y-4">
-                    
-                    <!-- Prediksi Kondisi Lingkungan -->
-                    <div class="flex items-center p-4 bg-gray-50 rounded-lg">
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-cloud-sun text-yellow-500 animate-bounce"></i>
-                            <div>
-                                <p class="font-medium text-gray-700">Kondisi Lingkungan</p>
-                                <p class="text-sm text-gray-500">Prediksi suhu dan kelembapan</p>
-                            </div>
-                        </div>
-                        <div class="ml-auto thinking" id="prediksiLingkungan">
-                            <span>.</span><span>.</span><span>.</span>
-                        </div>
-                    </div>
+            <!-- Prediksi & Analisis -->
+<div class="glass-card p-6 mt-6">
+    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+        <i class="fas fa-brain mr-2 text-indigo-600 animate-pulse"></i>
+        Prediksi & Analisis
+    </h3>
+    <div class="space-y-4">
 
-                    <!-- Deteksi Penyakit -->
-                    <div class="flex items-center p-4 bg-gray-50 rounded-lg">
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-virus text-red-500 animate-spin"></i>
-                            <div>
-                                <p class="font-medium text-gray-700">Deteksi Penyakit</p>
-                                <p class="text-sm text-gray-500">Hasil deteksi otomatis tanaman</p>
-                            </div>
-                        </div>
-                        <div class="ml-auto thinking" id="deteksiPenyakit">
-                            <span>.</span><span>.</span><span>.</span>
-                        </div>
-                    </div>
-
-                    <!-- Prediksi Panen -->
-                    <div class="flex items-center p-4 bg-gray-50 rounded-lg">
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-calendar-check text-green-600 animate-pulse"></i>
-                            <div>
-                                <p class="font-medium text-gray-700">Prediksi Panen</p>
-                                <p class="text-sm text-gray-500">Perkiraan tanggal panen</p>
-                            </div>
-                        </div>
-                        <div class="ml-auto thinking" id="prediksiPanen">
-                             <span>.</span><span>.</span><span>.</span>
-                        </div>
-                    </div>
-
-                    <!-- Prediksi Penggunaan Air & Nutrisi -->
-                    <div class="flex items-center p-4 bg-gray-50 rounded-lg">
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-tint text-blue-600 animate-bounce"></i>
-                            <div>
-                                <p class="font-medium text-gray-700">Prediksi Pemakaian Air & Nutrisi</p>
-                                <p class="text-sm text-gray-500">Estimasi penggunaan dalam periode tertentu</p>
-                            </div>
-                        </div>
-                        <div class="ml-auto thinking" id="prediksiAirNutrisi">
-                            <span>.</span><span>.</span><span>.</span>
-                        </div>
-                    </div>
-
+        <!-- Prediksi Kondisi Lingkungan -->
+        <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-cloud-sun text-yellow-500 animate-bounce"></i>
+                <div>
+                    <p class="font-medium text-gray-700">Kondisi Lingkungan</p>
+                    <p class="text-sm text-gray-500">Prediksi suhu dan kelembapan</p>
                 </div>
+            </div>
+            <div class="ml-auto thinking text-right" id="prediksiLingkungan">
+                <span>.</span><span>.</span><span>.</span>
+            </div>
+        </div>
+
+        <!-- Deteksi Penyakit -->
+        <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-virus text-red-500 animate-spin"></i>
+                <div>
+                    <p class="font-medium text-gray-700">Deteksi Penyakit</p>
+                    <p class="text-sm text-gray-500">Hasil deteksi otomatis tanaman</p>
+                </div>
+            </div>
+            <div class="ml-auto thinking" id="deteksiPenyakit">
+                <span>.</span><span>.</span><span>.</span>
+            </div>
+        </div>
+
+        <!-- Prediksi Panen -->
+        <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-calendar-check text-green-600 animate-pulse"></i>
+                <div>
+                    <p class="font-medium text-gray-700">Prediksi Panen</p>
+                    <p class="text-sm text-gray-500">Perkiraan tanggal panen</p>
+                </div>
+            </div>
+            <div class="ml-auto thinking text-right" id="prediksiPanen">
+                <span>.</span><span>.</span><span>.</span>
+            </div>
+        </div>
+
+        <!-- Prediksi Penggunaan Air & Nutrisi -->
+        <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-tint text-blue-600 animate-bounce"></i>
+                <div>
+                    <p class="font-medium text-gray-700">Prediksi Pemakaian Air & Nutrisi</p>
+                    <p class="text-sm text-gray-500">Estimasi penggunaan dalam periode tertentu</p>
+                </div>
+            </div>
+            <div class="ml-auto thinking text-right" id="prediksiAirNutrisi">
+                <span>.</span><span>.</span><span>.</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
             </div>
         </div>
         
@@ -909,6 +912,61 @@ setInterval(updateLiveSensor, 5000);
         }
     }
 </script>
+<script>
+async function kirimDataRealtime() {
+    try {
+        const res = await fetch("/sensor/live");
+        if (!res.ok) throw new Error("Gagal ambil data dari Laravel");
+        const data = await res.json();
+
+        // Kirim ke proxy Laravel via POST
+        const proxyRes = await fetch("/api/proxy-predict", {
+            method: "POST",   // ❌ harus POST
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+
+        if (!proxyRes.ok) {
+            throw new Error(`Gagal kirim data melalui proxy Laravel: ${proxyRes.status}`);
+        }
+
+        let result = {};
+        try {
+            result = await proxyRes.json();
+        } catch(e) {
+            console.warn("Response bukan JSON", e);
+            result = {};
+        }
+
+        // Update Blade
+        document.getElementById("prediksiLingkungan").innerText =
+            `Suhu: ${result.pred_suhu?.toFixed(2) ?? '-'} °C, Kelembaban: ${result.pred_kelembaban?.toFixed(2) ?? '-'}`;
+
+        document.getElementById("deteksiPenyakit").innerText =
+            result.anomaly === 1 ? "⚠️ Anomali terdeteksi" : "✅ Tanaman sehat";
+
+        document.getElementById("prediksiPanen").innerText =
+            result.est_days_to_harvest
+                ? `${result.est_days_to_harvest} hari lagi (${result.est_harvest_date})`
+                : '...';
+
+        document.getElementById("prediksiAirNutrisi").innerText =
+            result.est_use_air_per_day_units
+                ? `Air: ${result.est_use_air_per_day_units.toFixed(2)} L/hari, Nutrisi: ${result.est_use_nutrisi_per_day_L.toFixed(2)} L/hari`
+                : '...';
+
+    } catch (err) {
+        console.error("Error kirimDataRealtime:", err);
+    }
+}
+
+setInterval(kirimDataRealtime, 5000);
+kirimDataRealtime();
+
+
+</script>
+
+
 <script>
 document.getElementById("formLock").addEventListener("click", function () {
     const overlay = this;
