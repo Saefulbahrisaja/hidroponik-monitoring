@@ -35,18 +35,18 @@ class SensorController extends Controller
             $tdsMin   = Pengaturan::where('nama', 'tds_min')->value('nilai') ?? 700;
             $airMin   = Pengaturan::where('nama', 'air_min')->value('nilai') ?? 10;
             $interval = Pengaturan::where('nama', 'interval')->value('nilai') ?? 10; 
-            $suhu_udara_max = Pengaturan::where('nama', 'suhu_udara_max')->value('nilai') ?? 10; 
-            $volume_air = Pengaturan::where('nama', 'volume_air')->value('nilai') ?? 10; 
-            $volume_nutrisi_a = Pengaturan::where('nama', 'volume_nutrisi_a')->value('nilai') ?? 10; 
-            $volume_nutrisi_b = Pengaturan::where('nama', 'volume_nutrisi_b')->value('nilai') ?? 10; 
+            // $suhu_udara_max = Pengaturan::where('nama', 'suhu_udara_max')->value('nilai') ?? 10; 
+            // $volume_air = Pengaturan::where('nama', 'volume_air')->value('nilai') ?? 10; 
+            // $volume_nutrisi_a = Pengaturan::where('nama', 'volume_nutrisi_a')->value('nilai') ?? 10; 
+            // $volume_nutrisi_b = Pengaturan::where('nama', 'volume_nutrisi_b')->value('nilai') ?? 10; 
 
             return response()->json([
                 'tds_min'  => (float) $tdsMin,
                 'air_min'  => (float) $airMin,
                 'interval' => (int) $interval,
-                'suhu_udara_max'  => (float) $suhu_udara_max,
-                'volume_nutrisi_a'  => (float) $volume_nutrisi_a,
-                'volume_nutrisi_b' => (int) $volume_nutrisi_b,
+                // 'suhu_udara_max'  => (float) $suhu_udara_max,
+                // 'volume_nutrisi_a'  => (float) $volume_nutrisi_a,
+                // 'volume_nutrisi_b' => (int) $volume_nutrisi_b,
             ]);
         }
 
