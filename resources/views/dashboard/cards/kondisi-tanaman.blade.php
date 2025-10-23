@@ -138,7 +138,7 @@ async function fetchTanamanAktif(id) {
             // Ubah warna dan fase
             if (progress < 30) {
                 progressBar.className = "bg-blue-500 h-4 rounded-full text-xs text-center text-white font-semibold";
-                faseLabel.textContent = "🌱 Fase Semai (awal pertumbuhan)";
+                faseLabel.textContent = "🌱 Fase Awal Pertumbuhan";
             } else if (progress < 60) {
                 progressBar.className = "bg-green-400 h-4 rounded-full text-xs text-center text-white font-semibold";
                 faseLabel.textContent = "🌿 Fase Vegetatif (pertumbuhan daun dan batang)";
@@ -147,7 +147,7 @@ async function fetchTanamanAktif(id) {
                 faseLabel.textContent = "🌼 Fase Generatif (pembungaan & pembentukan buah)";
             } else {
                 progressBar.className = "bg-green-600 h-4 rounded-full text-xs text-center text-white font-semibold";
-                faseLabel.textContent = "🥬 Siap Panen (fase akhir)";
+                faseLabel.textContent = "🥬 Siap Panen ";
             }
             
             updatePrediksiPanen(tanaman, tanamDate);
