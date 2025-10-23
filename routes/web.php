@@ -32,15 +32,13 @@ Route::get('/sensor/live', function () {
         'suhuudara' => $data->pluck('suhuudara'),
         'kelembaban' => $data->pluck('kelembaban'),
 
-        // Hitung level air dalam persen berdasarkan batas air_min
         'level_air' => $data->pluck('level_air')->map(function ($value) use ($airMin) {
             if ($value === null) return null;
 
-            $min = 0;             // kondisi kosong
-            $max = $airMin;       // batas penuh sesuai pengaturan
-            $percent = (($value - $min) / ($max - $min)) * 100;
+            $max = $airMin > 0 ? $airMin : 1; // hindari pembagian nol
+            $percent = ($value / $max) * 100;
 
-            // jaga agar tetap 0–100%
+            // batasi agar tetap di antara 0–100%
             return round(max(0, min($percent, 100)), 1);
         }),
 
