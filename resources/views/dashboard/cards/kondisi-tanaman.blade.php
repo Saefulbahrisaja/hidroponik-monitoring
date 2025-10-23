@@ -126,7 +126,7 @@ async function fetchTanamanAktif(id) {
             }
 
             // Hitung progres pertumbuhan
-            const totalHari = tanaman.masa_tumbuh ?? 40;
+            const totalHari = tanaman.masa_tumbuh ?? 10;
             progress = Math.min((usiaTanam / totalHari) * 100, 100);
 
             const progressBar = document.getElementById('progressBar');
@@ -149,6 +149,8 @@ async function fetchTanamanAktif(id) {
                 progressBar.className = "bg-green-600 h-4 rounded-full text-xs text-center text-white font-semibold";
                 faseLabel.textContent = "🥬 Siap Panen (fase akhir)";
             }
+            
+            updatePrediksiPanen(tanaman, tanamDate);
         }
     } catch (error) {
         console.error("Gagal memuat tanaman aktif:", error);

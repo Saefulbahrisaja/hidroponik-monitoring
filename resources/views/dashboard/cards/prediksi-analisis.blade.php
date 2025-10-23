@@ -64,3 +64,41 @@
 
             </div>
         </div>
+@push('scripts')
+<script>
+  function updatePrediksiPanen(tanaman, tanamDate) {
+    const elemenPanen = document.getElementById('prediksiPanen');
+    const today = new Date();
+    if (tanamDate && tanaman.masa_tumbuh) {
+        const masaTumbuh = tanaman.masa_tumbuh;
+        const perkiraanPanenDate = new Date(tanamDate);
+        perkiraanPanenDate.setDate(perkiraanPanenDate.getDate() + masaTumbuh);
+
+        // Format tanggal panen
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        const tanggalPanenStr = perkiraanPanenDate.toLocaleDateString('id-ID', options);
+
+        // Hitung sisa hari menuju panen
+        const sisaHari = Math.max(0, Math.ceil((perkiraanPanenDate - today) / (1000 * 60 * 60 * 24)));
+
+        // Tentukan warna berdasarkan sisa hari
+        let warna = 'text-green-700';
+        if (sisaHari <= 3) warna = 'text-red-600 font-bold';
+        else if (sisaHari <= 7) warna = 'text-yellow-600 font-semibold';
+        else if (sisaHari === 0) warna = 'text-green-800 font-bold';
+
+        // Update tampilan
+        elemenPanen.innerHTML = `
+            <p class="text-sm text-gray-600">${tanggalPanenStr} <span class="text-sm ${warna}">${sisaHari > 0 ? `${sisaHari} hari lagi` : '🌾 Sudah waktunya panen!'}</p>
+              
+           
+        `;
+    } else {
+        elemenPanen.innerHTML = `
+            <p class="text-gray-500 italic">Data tanam belum tersedia</p>
+        `;
+    }
+}
+fetchPengaturan();
+</script>
+@endpush
