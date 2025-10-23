@@ -83,7 +83,7 @@ async function updateStatusSystem() {
 
         const elLevel = document.getElementById('statusLevelAir');
         
-        if (data.water_stat < data.air_min) {
+        if (data.water_stat > data.air_min) {
             elLevel.innerHTML = '<i class="fas fa-check-circle mr-1"></i> Air Kurang';
             elLevel.className = 'flex items-center bg-red-500 text-white font-bold px-3 py-1 rounded-full text-sm';
         } else {

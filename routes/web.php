@@ -31,12 +31,13 @@ Route::get('/sensor/live', function () {
         'ph' => $data->pluck('ph'),
         'suhuudara' => $data->pluck('suhuudara'),
         'kelembaban' => $data->pluck('kelembaban'),
-
         'level_air' => $data->pluck('level_air')->map(function ($value) use ($airMin) {
             if ($value === null) return null;
 
             $max = $airMin > 0 ? $airMin : 1; // hindari pembagian nol
-            $percent = ($value / $max) * 100;
+
+            // jika nilai air makin kecil, persentase makin besar
+            $percent = (1 - ($value / $max)) * 100;
 
             // batasi agar tetap di antara 0–100%
             return round(max(0, min($percent, 100)), 1);
