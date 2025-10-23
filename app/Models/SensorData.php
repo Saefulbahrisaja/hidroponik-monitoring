@@ -16,5 +16,12 @@ class SensorData extends Model
     'pompa_air',
     'pompa_nutrisi',
     'level_air',
-    'air_min',];
+    'air_min',
+    'tanaman_id'];
+
+    public function tanaman()
+    {
+        return $this->belongsTo(Tanaman::class);
+    }
+
 }

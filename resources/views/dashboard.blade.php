@@ -426,134 +426,198 @@
             </div>
         </div>
 
-            <!-- System Settings -->
-            <div class="relative glass-card p-6 mt-6 shadow-lg rounded-2xl border border-white/20 backdrop-blur-md">
-                <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-                    <i class="fas fa-sliders-h text-purple-600 text-lg"></i>
-                    Pengaturan Sistem
-                </h3>
+            
 
-                <!-- Form Pengaturan -->
-                <form id="pengaturanForm" method="POST" action="/api/update-batas" class="space-y-5">
-                    <div>
-                        <label for="tds_min" class="block text-sm font-semibold text-gray-700 mb-1 flex items-center">
-                            <i class="fas fa-tint label-icon"></i> TDS Minimum (ppm)
-                        </label>
-                        <input type="number" id="tds_min" name="tds_min" 
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg 
-                                focus:ring-2 focus:ring-green-500 focus:border-green-500
-                                bg-white/80 backdrop-blur-sm shadow-sm"
-                            placeholder="Masukkan nilai TDS minimum"
-                            required>
+           
+            <!--Detail Tanaman -->
+            <div class="glass-card p-6 mt-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-plant mr-2 text-indigo-600 animate-pulse"></i>
+               Kondisi Tanaman
+            </h3>
+            <div class="space-y-4">
+
+                <!-- Deteksi Penyakit -->
+                <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-virus text-red-500 animate-spin"></i>
+                        <div>
+                            <p class="font-medium text-gray-700">Nama Tanaman</p>
+                             <div class="ml-auto thinking text-right" id="prediksiPanen">
+                                <span>.</span><span>.</span><span>.</span>
+                             </div>
+                        </div>
                     </div>
-
-                    <div>
-                        <label for="air_min" class="block text-sm font-semibold text-gray-700 mb-1 flex items-center">
-                            <i class="fas fa-water label-icon"></i> Air Minimum (cm)
-                        </label>
-                        <input type="number" id="air_min" name="air_min" 
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg 
-                                focus:ring-2 focus:ring-green-500 focus:border-green-500
-                                bg-white/80 backdrop-blur-sm shadow-sm"
-                            placeholder="Masukkan batas minimum air"
-                            required>
+                    
+                </div>
+                <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-cloud-sun text-yellow-500 animate-bounce"></i>
+                        <div>
+                            <p class="font-medium text-gray-700">Hari Setelah Semai</p>
+                             <div class="ml-auto thinking text-right" id="prediksiPanen">
+                                <span>.</span><span>.</span><span>.</span>
+                             </div>
+                        </div>
+                        
                     </div>
-
-                    <div>
-                        <label for="interval" class="block text-sm font-semibold text-gray-700 mb-1 flex items-center">
-                            <i class="fas fa-clock label-icon"></i> Interval Simpan (detik)
-                        </label>
-                        <input type="number" id="interval" name="interval" 
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg 
-                                focus:ring-2 focus:ring-green-500 focus:border-green-500
-                                bg-white/80 backdrop-blur-sm shadow-sm"
-                            placeholder="Contoh: 60"
-                            required>
+                </div>
+                <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-calendar-check text-green-600 animate-pulse"></i>
+                        <div>
+                            <p class="font-medium text-gray-700">Hari Setelah Tanam </p>
+                            <div class="ml-auto thinking text-right" id="prediksiPanen">
+                                <span>.</span><span>.</span><span>.</span>
+                            </div>
+                        </div>
                     </div>
-
-                    <button type="submit" 
-                        class="w-full px-4 py-3 rounded-lg bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold 
-                            shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98] 
-                            transition-all duration-200 flex items-center justify-center gap-2">
-                        <i class="fas fa-save"></i> Simpan Pengaturan
-                    </button>
-                </form>
-
-                <!-- Overlay saat belum login -->
-                <div id="formLock" 
-                    class="lock-overlay absolute inset-0 bg-black/40 backdrop-blur-sm flex flex-col items-center justify-center text-white rounded-2xl">
-                    <i class="fas fa-lock text-5xl mb-3 lock-icon"></i>
-                    <p class="text-lg font-semibold">Silakan login untuk mengubah pengaturan</p>
+                    
                 </div>
-            </div>
 
-            <!-- Prediksi & Analisis -->
-            <!-- Prediksi & Analisis -->
-<div class="glass-card p-6 mt-6">
-    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-        <i class="fas fa-brain mr-2 text-indigo-600 animate-pulse"></i>
-        Prediksi & Analisis
-    </h3>
-    <div class="space-y-4">
-
-        <!-- Prediksi Kondisi Lingkungan -->
-        <div class="flex items-center p-4 bg-gray-50 rounded-lg">
-            <div class="flex items-center space-x-2">
-                <i class="fas fa-cloud-sun text-yellow-500 animate-bounce"></i>
-                <div>
-                    <p class="font-medium text-gray-700">Kondisi Lingkungan</p>
-                    <p class="text-sm text-gray-500">Prediksi suhu dan kelembapan</p>
+                <!-- Prediksi Penggunaan Air & Nutrisi -->
+                <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-tint text-blue-600 animate-bounce"></i>
+                        <div>
+                            <p class="font-medium text-gray-700">Anomali Daun</p>
+                            <div class="ml-auto thinking text-right" id="prediksiAirNutrisi">
+                                <span>.</span><span>.</span><span>.</span>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
-            </div>
-            <div class="ml-auto thinking text-right" id="prediksiLingkungan">
-                <span>.</span><span>.</span><span>.</span>
+
             </div>
         </div>
+        <!-- Prediksi & Analisis -->
+                <div class="glass-card p-6 mt-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-brain mr-2 text-indigo-600 animate-pulse"></i>
+                Prediksi & Analisis
+            </h3>
+            <div class="space-y-4">
 
-        <!-- Deteksi Penyakit -->
-        <div class="flex items-center p-4 bg-gray-50 rounded-lg">
-            <div class="flex items-center space-x-2">
-                <i class="fas fa-virus text-red-500 animate-spin"></i>
-                <div>
-                    <p class="font-medium text-gray-700">Deteksi Penyakit</p>
-                    <p class="text-sm text-gray-500">Hasil deteksi otomatis tanaman</p>
+                <!-- Prediksi Kondisi Lingkungan -->
+                <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-cloud-sun text-yellow-500 animate-bounce"></i>
+                        <div>
+                            <p class="font-medium text-gray-700">Kondisi Lingkungan</p>
+                            <div class="ml-auto thinking text-right" id="prediksiLingkungan">
+                                <span>.</span><span>.</span><span>.</span>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
-            </div>
-            <div class="ml-auto thinking" id="deteksiPenyakit">
-                <span>.</span><span>.</span><span>.</span>
+
+                <!-- Deteksi Penyakit -->
+                <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-virus text-red-500 animate-spin"></i>
+                        <div>
+                            <p class="font-medium text-gray-700">Deteksi Penyakit</p>
+                             <div class="ml-auto thinking" id="deteksiPenyakit">
+                                <span>.</span><span>.</span><span>.</span>
+                             </div>
+                        </div>
+                    </div>
+                   
+                </div>
+
+                <!-- Prediksi Panen -->
+                <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-calendar-check text-green-600 animate-pulse"></i>
+                        <div>
+                            <p class="font-medium text-gray-700">Perkiraan Panen</p>
+                             <div class="ml-auto thinking text-right" id="prediksiPanen">
+                                <span>.</span><span>.</span><span>.</span>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+                   
+
+                <!-- Prediksi Penggunaan Air & Nutrisi -->
+                <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-tint text-blue-600 animate-bounce"></i>
+                        <div>
+                            <p class="font-medium text-gray-700">Pemakaian Air & Nutrisi</p>
+                            <div class="ml-auto thinking text-right" id="prediksiAirNutrisi">
+                                <span>.</span><span>.</span><span>.</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
             </div>
         </div>
+         <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6 mb-8">
+                    <div class="relative glass-card p-12 mt-12 shadow-lg rounded-2xl border border-white/20 backdrop-blur-md">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                            <i class="fas fa-sliders-h text-purple-600 text-lg"></i>
+                            Pengaturan Sistem
+                        </h3>
 
-        <!-- Prediksi Panen -->
-        <div class="flex items-center p-4 bg-gray-50 rounded-lg">
-            <div class="flex items-center space-x-2">
-                <i class="fas fa-calendar-check text-green-600 animate-pulse"></i>
-                <div>
-                    <p class="font-medium text-gray-700">Prediksi Panen</p>
-                    <p class="text-sm text-gray-500">Perkiraan tanggal panen</p>
-                </div>
-            </div>
-            <div class="ml-auto thinking text-right" id="prediksiPanen">
-                <span>.</span><span>.</span><span>.</span>
-            </div>
-        </div>
+                        <!-- Form Pengaturan -->
+                        <form id="pengaturanForm" method="POST" action="/api/update-batas" class="space-y-5">
+                            <div>
+                                <label for="tds_min" class="block text-sm font-semibold text-gray-700 mb-1 flex items-center">
+                                    <i class="fas fa-tint label-icon"></i> TDS Minimum (ppm)
+                                </label>
+                                <input type="number" id="tds_min" name="tds_min" 
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg 
+                                        focus:ring-2 focus:ring-green-500 focus:border-green-500
+                                        bg-white/80 backdrop-blur-sm shadow-sm"
+                                    placeholder="Masukkan nilai TDS minimum"
+                                    required>
+                            </div>
 
-        <!-- Prediksi Penggunaan Air & Nutrisi -->
-        <div class="flex items-center p-4 bg-gray-50 rounded-lg">
-            <div class="flex items-center space-x-2">
-                <i class="fas fa-tint text-blue-600 animate-bounce"></i>
-                <div>
-                    <p class="font-medium text-gray-700">Prediksi Pemakaian Air & Nutrisi</p>
-                    <p class="text-sm text-gray-500">Estimasi penggunaan dalam periode tertentu</p>
-                </div>
-            </div>
-            <div class="ml-auto thinking text-right" id="prediksiAirNutrisi">
-                <span>.</span><span>.</span><span>.</span>
-            </div>
-        </div>
+                            <div>
+                                <label for="air_min" class="block text-sm font-semibold text-gray-700 mb-1 flex items-center">
+                                    <i class="fas fa-water label-icon"></i> Air Minimum (cm)
+                                </label>
+                                <input type="number" id="air_min" name="air_min" 
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg 
+                                        focus:ring-2 focus:ring-green-500 focus:border-green-500
+                                        bg-white/80 backdrop-blur-sm shadow-sm"
+                                    placeholder="Masukkan batas minimum air"
+                                    required>
+                            </div>
 
-    </div>
-</div>
+                            <div>
+                                <label for="interval" class="block text-sm font-semibold text-gray-700 mb-1 flex items-center">
+                                    <i class="fas fa-clock label-icon"></i> Interval Simpan (detik)
+                                </label>
+                                <input type="number" id="interval" name="interval" 
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg 
+                                        focus:ring-2 focus:ring-green-500 focus:border-green-500
+                                        bg-white/80 backdrop-blur-sm shadow-sm"
+                                    placeholder="Contoh: 60"
+                                    required>
+                            </div>
+
+                            <button type="submit" 
+                                class="w-full px-4 py-3 rounded-lg bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold 
+                                    shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98] 
+                                    transition-all duration-200 flex items-center justify-center gap-2">
+                                <i class="fas fa-save"></i> Simpan Pengaturan
+                            </button>
+                        </form>
+
+                        <!-- Overlay saat belum login -->
+                        <div id="formLock" 
+                            class="lock-overlay absolute inset-0 bg-black/40 backdrop-blur-sm flex flex-col items-center justify-center text-white rounded-2xl">
+                            <i class="fas fa-lock text-5xl mb-3 lock-icon"></i>
+                            <p class="text-lg font-semibold">Silakan login untuk mengubah pengaturan</p>
+                        </div>
+                    </div>
+            </div>
 
             </div>
         </div>
