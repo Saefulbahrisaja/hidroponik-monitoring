@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\SensorData;
 use App\Models\Pengaturan;
 use Illuminate\Http\JsonResponse;
+use App\Models\Tanaman;
 
 class SensorController extends Controller
 {
@@ -81,5 +82,36 @@ class SensorController extends Controller
         ]
     ]);
 }
+
+/**
+     * Ambil detail tanaman aktif dari tabel tanaman
+     */
+    public function getTanamanAktif(): JsonResponse
+    {
+        $tanamanAktifId = Pengaturan::where('nama', 'tanaman_aktif')->value('nilai');
+
+        if (!$tanamanAktifId) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Belum ada tanaman aktif yang diset',
+                'data' => null
+            ], 404);
+        }
+
+        $tanaman = Tanaman::find($tanamanAktifId);
+
+        if (!$tanaman) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Tanaman aktif tidak ditemukan di database',
+                'data' => null
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $tanaman
+        ]);
+    }
 
 }

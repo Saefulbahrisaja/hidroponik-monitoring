@@ -33,6 +33,6 @@ class DashboardController extends Controller
         $suhuudara = $dataSensor->pluck('suhu_udara')->toArray();
         $kelembaban = $dataSensor->pluck('kelembaban_udara')->toArray();
 
-        return view('dashboard', compact('waktu', 'suhu', 'tds', 'ph', 'suhuudara', 'kelembaban','data'));
+        return view('dashboard.index', compact('waktu', 'suhu', 'tds', 'ph', 'suhuudara', 'kelembaban','data'));
 }
 }

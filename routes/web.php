@@ -14,7 +14,10 @@ Route::get('/export-excel', function (Request $request) {
     return Excel::download(new SensorExport($filter), 'data-sensor.xlsx');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/', function () {
+    return view('dashboard.index');
+});
+
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/sensor/live', function () {
     $data = SensorData::latest()->take(50)->get()->reverse()->values();
@@ -27,10 +30,12 @@ Route::get('/sensor/live', function () {
         'ph' => $data->pluck('ph'),
         'suhuudara' => $data->pluck('suhuudara'),
         'kelembaban' => $data->pluck('kelembaban'),
+        'level_air'     => $data->pluck('level_air'),
+        
         // Ambil status sistem dari record terbaru
         'pompa_air'     => (bool) optional($latest)->pompa_air,
         'pompa_nutrisi' => (bool) optional($latest)->pompa_nutrisi,
-        'level_air'     => optional($latest)->level_air,
+        'water_stat'     => optional($latest)->level_air,
         'air_min'       => (float) Pengaturan::where('nama', 'air_min')->value('nilai') ?? 10,
     ]);
 }); 

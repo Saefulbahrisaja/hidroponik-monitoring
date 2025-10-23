@@ -349,7 +349,7 @@
     </style>
 </head>
 <body class="min-h-screen">
-    <!-- Header -->
+
 <!-- Header -->
 <header class="fixed top-0 left-0 w-full z-50 bg-green-700/70 backdrop-blur-md text-white py-6 shadow-lg">
     <div class="container mx-auto px-6">
@@ -365,7 +365,6 @@
 <main class="container mx-auto px-6 py-8 pt-32">
         <!-- Filter & Status Section -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-            
             <!-- System Status -->
             <div class="glass-card p-6 mt-6">
             <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
@@ -438,61 +437,54 @@
             <div class="space-y-4">
 
                 <!-- Deteksi Penyakit -->
+                <!-- Nama Tanaman -->
+                <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-leaf text-green-600 animate-pulse"></i>
+                        <div>
+                            <p class="font-medium text-gray-700">Nama Tanaman</p>
+                            <p id="namaTanaman" class="text-gray-800 font-semibold">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hari Setelah Semai -->
+                <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-clock text-yellow-500 animate-bounce"></i>
+                        <div>
+                            <p class="font-medium text-gray-700">Hari Setelah Semai</p>
+                            <p id="hariSemai" class="text-gray-800 font-semibold">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hari Setelah Tanam -->
+                <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-calendar text-blue-500 animate-pulse"></i>
+                        <div>
+                            <p class="font-medium text-gray-700">Hari Setelah Tanam</p>
+                            <p id="hariTanam" class="text-gray-800 font-semibold">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Anomali Daun -->
                 <div class="flex items-center p-4 bg-gray-50 rounded-lg">
                     <div class="flex items-center space-x-2">
                         <i class="fas fa-virus text-red-500 animate-spin"></i>
                         <div>
-                            <p class="font-medium text-gray-700">Nama Tanaman</p>
-                             <div class="ml-auto thinking text-right" id="prediksiPanen">
-                                <span>.</span><span>.</span><span>.</span>
-                             </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="flex items-center p-4 bg-gray-50 rounded-lg">
-                    <div class="flex items-center space-x-2">
-                        <i class="fas fa-cloud-sun text-yellow-500 animate-bounce"></i>
-                        <div>
-                            <p class="font-medium text-gray-700">Hari Setelah Semai</p>
-                             <div class="ml-auto thinking text-right" id="prediksiPanen">
-                                <span>.</span><span>.</span><span>.</span>
-                             </div>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="flex items-center p-4 bg-gray-50 rounded-lg">
-                    <div class="flex items-center space-x-2">
-                        <i class="fas fa-calendar-check text-green-600 animate-pulse"></i>
-                        <div>
-                            <p class="font-medium text-gray-700">Hari Setelah Tanam </p>
-                            <div class="ml-auto thinking text-right" id="prediksiPanen">
-                                <span>.</span><span>.</span><span>.</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-
-                <!-- Prediksi Penggunaan Air & Nutrisi -->
-                <div class="flex items-center p-4 bg-gray-50 rounded-lg">
-                    <div class="flex items-center space-x-2">
-                        <i class="fas fa-tint text-blue-600 animate-bounce"></i>
-                        <div>
                             <p class="font-medium text-gray-700">Anomali Daun</p>
-                            <div class="ml-auto thinking text-right" id="prediksiAirNutrisi">
-                                <span>.</span><span>.</span><span>.</span>
-                            </div>
+                            <p id="anomaliDaun" class="text-gray-800 font-semibold">Loading...</p>
                         </div>
                     </div>
-                    
                 </div>
 
             </div>
         </div>
         <!-- Prediksi & Analisis -->
-                <div class="glass-card p-6 mt-6">
+            <div class="glass-card p-6 mt-6">
             <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
                 <i class="fas fa-brain mr-2 text-indigo-600 animate-pulse"></i>
                 Prediksi & Analisis
@@ -722,7 +714,7 @@
             </h4>
             <canvas id="combinedChart" class="w-full h-80"></canvas>
         </div>
-    </main>
+</main>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-6 mt-12">
@@ -1092,5 +1084,31 @@ document.getElementById("formLock").addEventListener("click", function () {
 }, 100);
 });
 </script>
+<script>
+async function tampilkanTanamanAktif() {
+    try {
+        const res = await fetch('/api/tanaman/aktif');
+        const data = await res.json();
+
+        if (res.ok) {
+            document.getElementById('namaTanaman').innerText = data.nama_tanaman;
+            document.getElementById('hariSemai').innerText = data.hss + ' hari';
+            document.getElementById('hariTanam').innerText = data.hst + ' hari';
+            document.getElementById('anomaliDaun').innerText = data.nama_ilmiah;
+        } else {
+            document.getElementById('namaTanaman').innerText = "Tidak ada tanaman aktif";
+            document.getElementById('hariSemai').innerText = "-";
+            document.getElementById('hariTanam').innerText = "-";
+            document.getElementById('anomaliDaun').innerText = "-";
+        }
+    } catch (error) {
+        console.error("Gagal memuat data tanaman aktif:", error);
+    }
+}
+
+// Jalankan setelah halaman siap
+document.addEventListener('DOMContentLoaded', tampilkanTanamanAktif);
+</script>
+
 </body>
 </html>
