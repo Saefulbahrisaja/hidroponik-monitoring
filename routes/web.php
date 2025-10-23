@@ -1,27 +1,28 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Controllers\DashboardController;
 use App\Models\SensorData;
 use App\Models\Pengaturan;
 use App\Exports\SensorExport;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Http;
 
-
+// Export Excel
 Route::get('/export-excel', function (Request $request) {
     $filter = $request->filter ?? 'hari';
     return Excel::download(new SensorExport($filter), 'data-sensor.xlsx');
 });
 
-Route::get('/', function () {
-    return view('dashboard.index');
-});
-
+// Dashboard utama
 Route::get('/', [DashboardController::class, 'index']);
+
+// API live sensor (realtime)
 Route::get('/sensor/live', function () {
     $data = SensorData::latest()->take(50)->get()->reverse()->values();
-    $latest = $data->last(); // Ambil data terbaru (terakhir setelah reverse)
+    $latest = $data->last();
+
+    // Ambil batas level air dari pengaturan
+    $airMin = (float) Pengaturan::where('nama', 'air_min')->value('nilai') ?? 10;
 
     return response()->json([
         'waktu' => $data->pluck('created_at')->map(fn($t) => $t->format('H:i')),
@@ -30,14 +31,23 @@ Route::get('/sensor/live', function () {
         'ph' => $data->pluck('ph'),
         'suhuudara' => $data->pluck('suhuudara'),
         'kelembaban' => $data->pluck('kelembaban'),
-        'level_air'     => $data->pluck('level_air'),
-        
-        // Ambil status sistem dari record terbaru
+
+        // Hitung level air dalam persen berdasarkan batas air_min
+        'level_air' => $data->pluck('level_air')->map(function ($value) use ($airMin) {
+            if ($value === null) return null;
+
+            $min = 0;             // kondisi kosong
+            $max = $airMin;       // batas penuh sesuai pengaturan
+            $percent = (($value - $min) / ($max - $min)) * 100;
+
+            // jaga agar tetap 0–100%
+            return round(max(0, min($percent, 100)), 1);
+        }),
+
+        // Data tambahan
         'pompa_air'     => (bool) optional($latest)->pompa_air,
         'pompa_nutrisi' => (bool) optional($latest)->pompa_nutrisi,
-        'water_stat'     => optional($latest)->level_air,
-        'air_min'       => (float) Pengaturan::where('nama', 'air_min')->value('nilai') ?? 10,
+        'water_stat'    => optional($latest)->level_air,
+        'air_min'       => $airMin,
     ]);
-}); 
-
-
+});

@@ -55,7 +55,7 @@ async function updateLiveSensor() {
         document.getElementById("suhuAir").textContent = (last(data.suhu)?.toFixed(1) || '--') + " °C";
         document.getElementById("suhuudara").textContent = (last(data.suhuudara)?.toFixed(1) || '--') + " °C";
         document.getElementById("kelembaban").textContent = (last(data.kelembaban)?.toFixed(1) || '--') + " %";
-        document.getElementById("levelair").textContent = (last(data.level_air)?.toFixed(2) || '--') + " %";
+        document.getElementById("levelair").textContent = (last(data.level_air)?.toFixed(0) || '--') + " %";
 
         const lastTime = data.waktu?.length ? data.waktu[data.waktu.length - 1] : null;
         document.getElementById("waktuUpdate").textContent = lastTime || '--';
