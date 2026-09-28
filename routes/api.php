@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\SensorController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\DiseaseDetectionController;
 use Illuminate\Support\Facades\Http;
 
 
@@ -18,6 +19,11 @@ Route::post('/update-batas', [SensorController::class, 'updateBatas']);
 Route::get('/sensor/export', [SensorController::class, 'export']);
 Route::get('/sensor/filter', [SensorController::class, 'filterData']);
 Route::get('/tanaman/aktif', [SensorController::class, 'getTanamanAktif']);
+
+// Deteksi penyakit daun dari aplikasi Android
+Route::get('/sensor/latest', [DiseaseDetectionController::class, 'latestSensor']);
+Route::post('/disease-detection', [DiseaseDetectionController::class, 'store']);
+Route::get('/disease-detections', [DiseaseDetectionController::class, 'index']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

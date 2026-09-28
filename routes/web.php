@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\DashboardController;
 use App\Models\SensorData;
 use App\Models\Pengaturan;
+use App\Models\DiseaseDetection;
 use App\Exports\SensorExport;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -50,4 +51,10 @@ Route::get('/sensor/live', function () {
         'water_stat'    => optional($latest)->level_air,
         'air_min'       => $airMin,
     ]);
+});
+
+// Riwayat deteksi penyakit daun
+Route::get('/disease-detections', function () {
+    $detections = DiseaseDetection::with('tanaman')->latest('detected_at')->paginate(20);
+    return view('disease.index', compact('detections'));
 });
