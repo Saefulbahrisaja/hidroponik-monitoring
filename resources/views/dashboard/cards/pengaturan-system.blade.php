@@ -1,219 +1,268 @@
-<div class="glass-card p-6 mt-6">
-    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-        <i class="fas fa-sliders-h mr-2 text-indigo-600"></i> Pengaturan Sistem
-    </h3>
+{{-- CARD UTAMA PENGATURAN SISTEM --}}
+<div class="glass-card p-6 border border-slate-200/80 shadow-sm rounded-2xl bg-white relative overflow-hidden">
+    {{-- Header Section --}}
+    <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
+        <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-600">System Configuration</span>
+            <h3 class="text-xl font-extrabold text-slate-800 flex items-center gap-2 mt-0.5">
+                <i class="fas fa-sliders text-emerald-600"></i>
+                Pengaturan Sistem
+            </h3>
+        </div>
+        <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg shadow-sm border border-emerald-100">
+            <i class="fas fa-gear"></i>
+        </div>
+    </div>
 
+    {{-- Form Pengaturan --}}
     <form id="formPengaturan" class="space-y-4">
-        <div>
-            <label class="block font-semibold text-gray-700">Batas TDS Minimum (ppm)</label>
-            <input type="number" id="tds_min" name="tds_min"
-                   class="mt-1 w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-green-200 px-3 py-2" />
+        @csrf
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+                <label for="tds_min" class="block text-xs font-bold uppercase text-slate-600 mb-1">
+                    Batas TDS Minimum <span class="text-slate-400 font-normal">(ppm)</span>
+                </label>
+                <div class="relative">
+                    <input type="number" id="tds_min" name="tds_min" placeholder="600"
+                           class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all" />
+                    <span class="absolute right-3 top-2.5 text-xs font-bold text-slate-400">PPM</span>
+                </div>
+            </div>
+
+            <div>
+                <label for="air_min" class="block text-xs font-bold uppercase text-slate-600 mb-1">
+                    Batas Air Minimum <span class="text-slate-400 font-normal">(%)</span>
+                </label>
+                <div class="relative">
+                    <input type="number" id="air_min" name="air_min" placeholder="20"
+                           class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all" />
+                    <span class="absolute right-3 top-2.5 text-xs font-bold text-slate-400">%</span>
+                </div>
+            </div>
+
+            <div>
+                <label for="interval" class="block text-xs font-bold uppercase text-slate-600 mb-1">
+                    Interval Update <span class="text-slate-400 font-normal">(detik)</span>
+                </label>
+                <div class="relative">
+                    <input type="number" id="interval" name="interval" placeholder="10"
+                           class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all" />
+                    <span class="absolute right-3 top-2.5 text-xs font-bold text-slate-400">Detik</span>
+                </div>
+            </div>
         </div>
 
         <div>
-            <label class="block font-semibold text-gray-700">Batas Air Minimum (%)</label>
-            <input type="number" id="air_min" name="air_min"
-                   class="mt-1 w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-green-200 px-3 py-2" />
-        </div>
-
-        <div>
-            <label class="block font-semibold text-gray-700">Interval Update (detik)</label>
-            <input type="number" id="interval" name="interval"
-                   class="mt-1 w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-green-200 px-3 py-2" />
-        </div>
-
-        <div>
-            <label class="block font-semibold text-gray-700">Tanaman Aktif</label>
+            <label for="tanaman_aktif" class="block text-xs font-bold uppercase text-slate-600 mb-1">
+                Tanaman Aktif saat Ini
+            </label>
             <select id="tanaman_aktif" name="tanaman_aktif"
-                    class="mt-1 w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-green-200 px-3 py-2">
-                <option value="">Pilih Tanaman</option>
+                    class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all cursor-pointer">
+                <option value="">Memuat daftar tanaman...</option>
             </select>
         </div>
 
-        <button type="button" onclick="updateBatas()"
-                class="w-full bg-green-600 text-white font-semibold py-2 rounded-lg shadow hover:bg-green-700 transition">
-            Simpan Pengaturan
+        <button type="submit" id="btnSimpanPengaturan"
+                class="w-full bg-slate-900 text-white font-bold py-3 px-4 rounded-xl shadow-md hover:bg-emerald-600 transition-colors duration-200 flex items-center justify-center gap-2 text-sm mt-2">
+            <i class="fas fa-floppy-disk"></i>
+            <span>Simpan Pengaturan Sistem</span>
         </button>
     </form>
-    <div id="formLock" 
-        class="lock-overlay absolute inset-0 bg-black/40 backdrop-blur-sm flex flex-col items-center justify-center text-white rounded-2xl">
-            <i class="fas fa-lock text-5xl mb-3 lock-icon"></i>
-                <p class="text-lg font-semibold">Silakan login untuk mengubah pengaturan</p>
+
+    {{-- LOCK OVERLAY (Tampil jika belum login) --}}
+    @guest
+    <div id="formLockOverlay" 
+         class="absolute inset-0 bg-slate-900/70 backdrop-blur-md flex flex-col items-center justify-center text-white p-6 rounded-2xl cursor-pointer hover:bg-slate-900/80 transition-all group z-20">
+        <div class="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-lg">
+            <i class="fas fa-lock text-2xl text-emerald-300 lock-icon"></i>
+        </div>
+        <p class="text-base font-extrabold text-white text-center">Akses Pengaturan Terkunci</p>
+        <p class="text-xs text-slate-300 text-center mt-1">Klik di sini untuk login sebagai admin</p>
     </div>
+    @endguest
 </div>
 
 @push('scripts')
 <script>
-async function loadTanamanList() {
-    try {
-        const res = await fetch('/api/tanaman');
-        const data = await res.json();
-        const select = document.getElementById('tanaman_aktif');
+(function () {
+    const formPengaturan = document.getElementById('formPengaturan');
+    const selectTanaman = document.getElementById('tanaman_aktif');
+    const lockOverlay = document.getElementById('formLockOverlay');
 
-        select.innerHTML = '<option value="">Pilih Tanaman</option>';
-        data.data.forEach(t => {
-            const opt = document.createElement('option');
-            opt.value = t.id;
-            opt.textContent = t.nama_tanaman;
-            select.appendChild(opt);
-        });
-    } catch (error) {
-        console.error("Gagal memuat tanaman:", error);
-    }
-}
-
-async function updateBatas() {
-    const payload = {
-        tds_min: document.getElementById('tds_min').value,
-        air_min: document.getElementById('air_min').value,
-        interval: document.getElementById('interval').value,
-        tanaman_aktif: document.getElementById('tanaman_aktif').value
+    // Helper SweetAlert
+    const showAlert = (title, text, icon) => {
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({ title, text, icon, confirmButtonColor: '#059669' });
+        } else {
+            alert(`${title}: ${text}`);
+        }
     };
 
-    try {
-        const res = await fetch('/api/batas/update', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify(payload)
-        });
-
-        const result = await res.json();
-        Swal.fire('Berhasil!', result.message, 'success');
-        fetchPengaturan();
-    } catch (error) {
-        Swal.fire('Gagal!', 'Terjadi kesalahan saat menyimpan data.', 'error');
+    // 1. Load Daftar Tanaman
+    async function loadTanamanList() {
+        if (!selectTanaman) return;
+        try {
+            const res = await fetch('{{ url('/api/tanaman') }}');
+            if (!res.ok) return;
+            const data = await res.json();
+            
+            selectTanaman.innerHTML = '<option value="">-- Pilih Tanaman --</option>';
+            const list = data.data || data;
+            
+            if (Array.isArray(list)) {
+                list.forEach(t => {
+                    const opt = document.createElement('option');
+                    opt.value = t.id;
+                    opt.textContent = t.nama_tanaman;
+                    selectTanaman.appendChild(opt);
+                });
+            }
+        } catch (error) {
+            console.debug("Gagal memuat tanaman:", error);
+        }
     }
-}
 
-loadTanamanList();
-</script>
-<script>
+    // 2. Fetch Batas Sensor & Setting
     async function fetchPengaturan() {
         try {
-            const res = await fetch('/api/batas');
-            const data = await res.json();
-            document.getElementById('tds_min').value = data.tds_min;
-            document.getElementById('air_min').value = data.air_min;
-            document.getElementById('interval').value = data.interval;
-        } catch (error) {
-            console.error("Gagal memuat pengaturan:", error);
-        }
-    }
-    fetchPengaturan();
-</script>
-<script>
-document.getElementById("pengaturanForm").addEventListener("submit", async function(e) {
-    e.preventDefault(); // Mencegah reload halaman
-
-    const form = e.target;
-    const data = {
-        tds_min: form.tds_min.value,
-        air_min: form.air_min.value,
-        interval: form.interval.value
-    };
-
-    try {
-        const response = await fetch(form.action, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
-            },
-            body: JSON.stringify(data)
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-            Swal.fire({
-                title: 'Berhasil!',
-                text: 'Pengaturan berhasil disimpan.',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        } else {
-            Swal.fire({
-                title: 'Gagal!',
-                text: 'Terjadi kesalahan saat menyimpan.',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-        }
-
-    } catch (err) {
-        console.error("Gagal simpan pengaturan:", err);
-        Swal.fire({
-            title: 'Gagal!',
-            text: 'Terjadi kesalahan jaringan.',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
-    }
-});
-</script>
-<script>
-document.getElementById("formLock").addEventListener("click", function () {
-    const overlay = this;
-    
-    // Ganti overlay dengan form login
-    overlay.outerHTML = `
-        <div class="absolute inset-0 bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl login-form p-6">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Login</h2>
-            <form id="loginForm" class="w-full max-w-xs space-y-4">
-                <input id="username" type="text" placeholder="Username" required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
-                <input id="password" type="password" placeholder="Password" required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
-                <button type="submit" 
-                    class="w-full px-4 py-2 rounded-lg bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200">
-                    <i class="fas fa-sign-in-alt"></i> Login
-                </button>
-            </form>
-        </div>
-    `;
-
-    setTimeout(() => {
-    document.getElementById("loginForm").addEventListener("submit", async function (e) {
-        e.preventDefault();
-
-        const username = document.getElementById("username").value.trim();
-        const password = document.getElementById("password").value.trim();
-
-        if (!username || !password) {
-            alert("Username dan password wajib diisi!");
-            return;
-        }
-
-        try {
-            // Kirim ke server untuk dicek di database
-            const res = await fetch("/api/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, password })
-            });
-
+            const res = await fetch('{{ url('/api/batas') }}');
+            if (!res.ok) return;
             const data = await res.json();
 
-            if (res.ok && data.success) {
-                alert("Login berhasil!");
-                document.querySelector("#pengaturanForm")
-                    .querySelectorAll("input, button")
-                    .forEach(el => el.disabled = false);
+            const setVal = (id, val) => {
+                const el = document.getElementById(id);
+                if (el && val !== undefined && val !== null) el.value = val;
+            };
 
-                document.querySelector(".login-form").remove();
-            } else {
-                alert(data.message || "Login gagal! Username atau password salah.");
+            setVal('tds_min', data.tds_min);
+            setVal('air_min', data.air_min);
+            setVal('interval', data.interval);
+
+            if (selectTanaman && data.tanaman_aktif) {
+                selectTanaman.value = data.tanaman_aktif;
             }
-        } catch (err) {
-            console.error(err);
-            alert("Gagal terhubung ke server.");
+        } catch (error) {
+            console.debug("Gagal memuat pengaturan:", error);
         }
+    }
+
+    // 3. Simpan Pengaturan Submit Event
+    if (formPengaturan) {
+        formPengaturan.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const payload = {
+                tds_min: document.getElementById('tds_min')?.value || '',
+                air_min: document.getElementById('air_min')?.value || '',
+                interval: document.getElementById('interval')?.value || '',
+                tanaman_aktif: selectTanaman?.value || ''
+            };
+
+            try {
+                const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') 
+                                || document.querySelector('input[name="_token"]')?.value || '';
+
+                const res = await fetch('{{ url('/api/batas/update') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await res.json();
+
+                if (res.ok && (result.success || result.status === 'success' || result.message)) {
+                    showAlert('Berhasil!', result.message || 'Pengaturan berhasil disimpan.', 'success');
+                    fetchPengaturan();
+                } else {
+                    showAlert('Gagal!', result.message || 'Terjadi kesalahan saat menyimpan.', 'error');
+                }
+            } catch (error) {
+                console.error("Error simpan pengaturan:", error);
+                showAlert('Gagal!', 'Terjadi kesalahan jaringan.', 'error');
+            }
+        });
+    }
+
+    // 4. Form Lock Overlay & Dynamic Quick Login Form
+    if (lockOverlay) {
+        lockOverlay.addEventListener('click', function () {
+            const container = this.parentElement;
+            
+            // Hapus Overlay Kunci & Tampilkan Form Login Pop-in
+            this.outerHTML = `
+                <div class="absolute inset-0 bg-white/95 backdrop-blur-md flex flex-col items-center justify-center p-6 rounded-2xl z-30 animate__animated animate__fadeIn">
+                    <div class="w-full max-w-xs space-y-4 text-center">
+                        <div>
+                            <h4 class="text-lg font-extrabold text-slate-800">Login Administrator</h4>
+                            <p class="text-xs text-slate-500">Masukkan kredensial untuk membuka pengaturan</p>
+                        </div>
+                        <form id="quickLoginForm" class="space-y-3 text-left">
+                            <div>
+                                <input id="quickUsername" type="text" placeholder="Username" required
+                                       class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-emerald-500 focus:bg-white" />
+                            </div>
+                            <div>
+                                <input id="quickPassword" type="password" placeholder="Password" required
+                                       class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-emerald-500 focus:bg-white" />
+                            </div>
+                            <button type="submit" 
+                                    class="w-full bg-emerald-600 text-white font-bold py-2.5 rounded-xl shadow-md hover:bg-emerald-700 transition-colors text-sm flex items-center justify-center gap-2">
+                                <i class="fas fa-key text-xs"></i> Unlocking Settings
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            `;
+
+            setTimeout(() => {
+                const quickLoginForm = document.getElementById("quickLoginForm");
+                if (quickLoginForm) {
+                    quickLoginForm.addEventListener("submit", async function (e) {
+                        e.preventDefault();
+
+                        const username = document.getElementById("quickUsername")?.value.trim();
+                        const password = document.getElementById("quickPassword")?.value.trim();
+
+                        if (!username || !password) return;
+
+                        try {
+                            const res = await fetch("{{ url('/api/login') }}", {
+                                method: "POST",
+                                headers: { 
+                                    "Content-Type": "application/json",
+                                    "Accept": "application/json"
+                                },
+                                body: JSON.stringify({ username, password })
+                            });
+
+                            const data = await res.json();
+
+                            if (res.ok && (data.success || data.token)) {
+                                showAlert("Autentikasi Berhasil!", "Akses pengaturan telah dibuka.", "success");
+                                // Hapus modal form login
+                                this.closest('.absolute').remove();
+                            } else {
+                                showAlert("Login Gagal", data.message || "Username atau password salah.", "error");
+                            }
+                        } catch (err) {
+                            console.error(err);
+                            showAlert("Gagal", "Terjadi kesalahan jaringan.", "error");
+                        }
+                    });
+                }
+            }, 50);
+        });
+    }
+
+    // Initial Execution
+    document.addEventListener('DOMContentLoaded', async () => {
+        await loadTanamanList();
+        await fetchPengaturan();
     });
-}, 100);
-});
+})();
 </script>
 @endpush
