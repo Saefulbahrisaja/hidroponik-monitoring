@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DiseaseAnalysisController;
 use App\Models\SensorData;
 use App\Models\Pengaturan;
 use App\Models\DiseaseDetection;
@@ -52,7 +53,7 @@ Route::get('/sensor/live', function () {
         'air_min'       => $airMin,
     ]);
 });
-
+Route::get('/disease-analysis', [DiseaseAnalysisController::class, 'index']);
 // Riwayat deteksi penyakit daun
 Route::get('/disease-detections', function () {
     $detections = DiseaseDetection::with('tanaman')->latest('detected_at')->paginate(20);

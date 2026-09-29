@@ -6,7 +6,6 @@ use App\Http\Controllers\Api\SensorController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DiseaseDetectionController;
 use Illuminate\Support\Facades\Http;
-use App\Http\Controllers\DiseaseAnalysisController;
 
 
 
@@ -25,7 +24,7 @@ Route::get('/tanaman/aktif', [SensorController::class, 'getTanamanAktif']);
 Route::get('/sensor/latest', [DiseaseDetectionController::class, 'latestSensor']);
 Route::post('/disease-detection', [DiseaseDetectionController::class, 'store']);
 Route::get('/disease-detections', [DiseaseDetectionController::class, 'index']);
-Route::get('/disease-analysis', [DiseaseAnalysisController::class, 'index']);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

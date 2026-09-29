@@ -42,7 +42,7 @@
             <div class="min-w-0">
                 <p class="text-xs font-bold text-slate-400 uppercase tracking-wide">Tanaman Sehat</p>
                 <p class="text-xl sm:text-2xl font-black text-emerald-600 mt-0.5">
-                    {{ $detections->whereIn('disease', ['Healthy', 'healthy', 'Sehat'])->count() }}
+                    {{ $healthyCount ?? $detections->getCollection()->filter(fn($d) => str_contains(strtolower($d->disease), 'healthy') || str_contains(strtolower($d->disease), 'sehat'))->count() }}
                 </p>
             </div>
         </div>
@@ -55,12 +55,12 @@
             <div class="min-w-0">
                 <p class="text-xs font-bold text-slate-400 uppercase tracking-wide">Hama / Pest</p>
                 <p class="text-xl sm:text-2xl font-black text-amber-600 mt-0.5">
-                    {{ $detections->whereIn('disease', ['Pest', 'pest', 'Hama'])->count() }}
+                    {{ $pestCount ?? $detections->getCollection()->filter(fn($d) => str_contains(strtolower($d->disease), 'pest') || str_contains(strtolower($d->disease), 'hama'))->count() }}
                 </p>
             </div>
         </div>
 
-        {{-- Virus --}}
+        {{-- Virus / Penyakit --}}
         <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-xs flex items-center gap-4">
             <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg shrink-0 border border-rose-100">
                 <i class="fas fa-virus"></i>
@@ -68,7 +68,7 @@
             <div class="min-w-0">
                 <p class="text-xs font-bold text-slate-400 uppercase tracking-wide">Penyakit / Virus</p>
                 <p class="text-xl sm:text-2xl font-black text-rose-600 mt-0.5">
-                    {{ $detections->whereIn('disease', ['Virus', 'virus', 'Bakteri'])->count() }}
+                    {{ $virusCount ?? $detections->getCollection()->filter(fn($d) => !str_contains(strtolower($d->disease), 'healthy') && !str_contains(strtolower($d->disease), 'sehat'))->count() }}
                 </p>
             </div>
         </div>
@@ -81,7 +81,7 @@
                 <i class="fas fa-list text-emerald-600"></i>
                 Daftar Riwayat Deteksi
             </h2>
-            <span class="text-xs font-semibold text-slate-400">Total: {{ $detections->total() }} Data</span>
+            <span class="text-xs font-semibold text-slate-400">Menampilkan {{ $detections->count() }} dari {{ $detections->total() }} Data</span>
         </div>
 
         <div class="overflow-x-auto">
@@ -112,10 +112,11 @@
                         {{-- Foto Sampel --}}
                         <td class="px-4 py-3">
                             @if($detection->image_path)
-                                <a href="{{ asset($detection->image_path) }}" target="_blank" class="block relative group w-14 h-14">
+                                <a href="{{ asset($detection->image_path) }}" target="_blank" class="block relative group w-14 h-14" title="Klik untuk memperbesar">
                                     <img src="{{ asset($detection->image_path) }}" 
                                          class="w-14 h-14 rounded-xl object-cover border border-slate-200 shadow-xs group-hover:scale-105 transition-transform" 
-                                         alt="Daun">
+                                         alt="Daun"
+                                         onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=No+Image';">
                                     <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 rounded-xl flex items-center justify-center text-white text-xs transition-opacity">
                                         <i class="fas fa-magnifying-glass-plus"></i>
                                     </div>
@@ -130,11 +131,11 @@
                         {{-- Waktu Deteksi --}}
                         <td class="px-4 py-3 whitespace-nowrap">
                             <span class="font-bold text-slate-800 block">
-                                {{ optional($detection->detected_at)->format('d M Y') }}
+                                {{ optional($detection->detected_at)->format('d M Y') ?? '-' }}
                             </span>
                             <span class="text-[11px] text-slate-400 flex items-center gap-1 mt-0.5">
                                 <i class="far fa-clock"></i>
-                                {{ optional($detection->detected_at)->format('H:i:s') }} WIB
+                                {{ optional($detection->detected_at)->format('H:i:s') ?? '--:--' }} WIB
                             </span>
                         </td>
 

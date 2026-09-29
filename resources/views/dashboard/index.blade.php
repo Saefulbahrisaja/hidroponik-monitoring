@@ -3,14 +3,8 @@
 @section('title', 'Dashboard Hidroponik - SIKECE')
 
 @section('content')
-<div class="mb-3 d-flex justify-content-end">
-    <a href="{{ url('/disease-analysis') }}" class="btn btn-outline-primary">
-        <i class="fa-solid fa-chart-line me-1"></i> Analisis Kondisi & Penyakit
-    </a>
-</div>
-<div class="space-y-6">
-    
 
+<div class="space-y-6">
     {{-- STATUS RINGKAS --}}
     <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <div class="modern-stat">
@@ -75,6 +69,9 @@
             </div>
             <a href="{{ url('/disease-detections') }}" class="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gray-900 text-white py-3 font-bold hover:bg-gray-800 transition">
                 Lihat Riwayat Deteksi <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+             <a href="{{ url('/disease-analysis') }}" class="btn btn-outline-primary">
+                <i class="fa-solid fa-chart-line me-1"></i> Analisis Kondisi & Penyakit
             </a>
         </div>
     </section>
