@@ -9,28 +9,7 @@
     </a>
 </div>
 <div class="space-y-6">
-    {{-- HERO --}}
-    <section class="dashboard-hero rounded-3xl p-6 md:p-8 text-white overflow-hidden relative">
-        <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-            <div>
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-sm mb-3">
-                    <span class="w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span>
-                    Hydroponic Monitoring System
-                </div>
-                <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight">Dashboard Hidroponik</h1>
-                <p class="mt-2 text-white/80 max-w-2xl">Pantau kondisi nutrisi, lingkungan, tanaman, dan hasil deteksi penyakit dalam satu halaman.</p>
-            </div>
-            <div class="flex flex-wrap gap-3">
-                <a href="{{ url('/disease-detections') }}" class="hero-action bg-white text-emerald-700 hover:bg-emerald-50">
-                    <i class="fas fa-camera"></i> Deteksi Penyakit
-                </a>
-                <a href="{{ url('/export-excel') }}?filter={{ $filter }}" class="hero-action bg-white/10 text-white border border-white/25 hover:bg-white/20">
-                    <i class="fas fa-file-excel"></i> Export Data
-                </a>
-            </div>
-        </div>
-        <div class="hero-orb orb-1"></div><div class="hero-orb orb-2"></div>
-    </section>
+    
 
     {{-- STATUS RINGKAS --}}
     <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
